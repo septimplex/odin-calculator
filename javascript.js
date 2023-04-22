@@ -1,22 +1,11 @@
-function add(a,b){
-    return a+b;
-}
+let add = (a,b) => {return a+b;}
 
-function subtract(a,b){
-    return a-b;
-}
+let subtract = (a,b) => {return a-b;}
 
-function multiply(a,b){
-    return a*b;
-}
+let multiply = (a,b) => {return a*b;}
 
-function divide(a,b){
-    return a/b;
-}
+let divide = (a,b) => {return a/b;}
 
-const number1 = 0;
-const number2 = 0;
-const operand = "";
 
 function operate(num1,num2,operand){
     if(operand == "+"){
@@ -33,9 +22,26 @@ function operate(num1,num2,operand){
     }
 }
 
-let btns = document.querySelectorAll(".btn");
+let display = document.querySelector("#calculation");
+let numBtns = document.querySelectorAll(".num");
+let actionBtns = document.querySelectorAll(".action");
+let operationBtns = document.querySelectorAll(".operation");
+let equalBtn = document.querySelector(".equal");
 
-btns.forEach(btn => btn.addEventListener('click', function(){
-    console.log(btn.value);
-})
-   );
+let number1 = 0;
+let number2 = 0;
+let operand = "";
+
+numBtns.forEach(btn => btn.addEventListener('click', function(){
+    display.innerText += btn.value;
+    if (display.innerText[0] === "0"){
+        display.innerText = display.innerText.substring(1);
+    }
+}
+));
+
+operationBtns.forEach(btn => btn.addEventListener('click', function(){
+    console.log(btn.innerText);
+}
+));
+
