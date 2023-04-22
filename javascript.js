@@ -33,3 +33,9 @@ function operate(num1,num2,operand){
     }
 }
 
+let btns = document.querySelectorAll(".btn");
+
+btns.forEach(btn => btn.addEventListener('click', function(){
+    console.log(btn.value);
+})
+   );
