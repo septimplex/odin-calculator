@@ -45,14 +45,11 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         if(number1 == ""){
             currentOperand = "";
             stringOperand+=btn.value;
-            console.log("number1 empty");
         }
         
         else if(number1 != "" && number2 == ""){
             stringOperand = "";
             stringOperand+=btn.value;
-            
-            console.log("number1 exists and number2 empty");
         }
 
         else{
@@ -64,8 +61,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
             number1 = result;
             number2 = "";
             stringOperand=currentOperand;
-            console.log(result);
-            console.log("did operate");
+            
         }
 
         
@@ -73,12 +69,36 @@ btns.forEach(btn => btn.addEventListener('click', function(){
 
 
     else if(btn.className == "equal"){
-        
+        removeClass();
+        if(number1 == ""){
+            return;
+        }
+
+        else if(currentOperand == ""){
+            return;
+        }
+
+        else if(number1 != "" && number2 == "" && currentOperand != ""){
+            num1 = parseFloat(number1);
+            result = operate(num1,num1,currentOperand);
+            display.innerText = result;
+            number1 = result;
+            number2 = "";     
+        }
+
+        else{
+            num1 = parseFloat(number1);
+            num2 = parseFloat(number2);
+            result = operate(num1,num2,currentOperand);
+            display.innerText = result;
+            number1 = result;
+            number2 = "";
+        }
     }
-    // ako je number i current je nula
-    //samo displayajaj broj
+
+    
     else if(btn.className == "num"){
-        
+        removeClass();
         if(number1 == ""){
             if(btn.value == 0){
                 number1 = "";
@@ -90,94 +110,101 @@ btns.forEach(btn => btn.addEventListener('click', function(){
                 number1 += btn.value;
                 display.innerText = number1;
                 
-                console.log("number 1 empty and operand -");
             }
 
             else{
                 number1 += btn.value;
                 display.innerText = number1;
-                console.log("number 1 empty and operand not -");
             }
 
         }
         else if(number1 != "" && currentOperand == ""){
                 number1 += btn.value;
                 display.innerText = number1;
-                console.log("number1 filled and current operand not exist");
         }
 
         else{
             number2 += btn.value;
             display.innerText = number2;
-            console.log("filling number 2");
         }
 
             
         
         }
-        console.log("num1 = "+ number1 + " num2 = " +number2 + " current op = " + currentOperand + " op string = " + stringOperand);
+        
+    else{
+        if(btn.id == "CA"){
+            resetCalculator();
+        }
+
+        else if(btn.id == "C"){
+            if(number1.length == 1){
+                number1 = 0;
+                display.innerText = number1;
+            }
+
+            else if(number2 == "" && number1.length > 1){
+                number1 = number1.slice(0,-1);
+                display.innerText = number1;
+            }
+
+            else if(number2 != ""){
+                if(number2.length == 1){
+                    number2 = 0;
+                    display.innerText = number2;
+                }
+                else{
+                    number2 = number2.slice(0,-1);
+                    display.innerText = number2;
+                }
+            }
+        }
+
+    else if(btn.id == "plusminus"){
+       
+        if(display.innerText == number1){
+            if(display.innerText != "0" && display.innerText[0]!="-"){
+                display.innerText = "-" + display.innerText;
+            }
+        
+            else if(display.innerText != "0"){
+                display.innerText = number1.slice(1);
+            }
+            number1 = display.innerText;
+    }
+        if(display.innerText == number2){
+            if(display.innerText != "0" && display.innerText[0]!="-"){
+                display.innerText = "-" + display.innerText;
+            }
+        
+            else if(display.innerText != "0"){
+                display.innerText = number2.slice(1);
+            }
+            number2 = display.innerText;
+        }
+    }   
+    else if (btn.id == "dot"){
+        if(display.innerText == number1){}
+    }
+
+    }
+    /*
+    1. popravit ono kad se upisuje pa bude 012;
+    2. dodat dot !not more then one // dodat da ispisuje do 2 decimale
+    3. dodat msg kad se dijeli s nulom i resetirat
+    4. uredit izgled
+    5. backspace btn i funkcionalnost preko keyboard
+    */
         
        
-        
+
+
+    
+    
+    
+
+    
    
-
-    
-
-    
-
-    
-
-    
-    
-        
-
-    
-    
-    
-
-    
-    /*
-    if(number1 > 0 && number2 > 0 && operand != ""){
-        let result = operate(number1, number2, operand);
-        display.innerText = result;
-        number1 = result;
-    }
-
-    if(btn.className == "num"){
-    if(number1 == 0){
-        display.innerText += btn.value;
-            if (display.innerText[0] === "0"){
-                display.innerText = display.innerText.substring(1);
-            }
-            
-        number1 = display.innerText;
-    } 
-
-
-    else{
-        display.innerText = "";
-
-    }
-}
-
-    
-
-    
-
-    if(btn.className == "num"){
-        display.innerText += btn.value;
-        if (display.innerText[0] === "0"){
-            display.innerText = display.innerText.substring(1);
-        }
-
-    }
-
-    if(btn.className == "operation"){
-        if(operand == ""){
-            number1 = display.innerText;
-        }
-    }*/
-    
 }
 ));
 
@@ -190,5 +217,16 @@ function removeClass(){
 
 function addClass(btn){
     btn.classList.add("active");
+}
+
+function resetCalculator(){
+    removeClass();
+    number1 = "";
+    number2 = "";
+    result = 0;
+
+    stringOperand = "";
+    currentOperand = "";
+    display.innerText = "0";
 }
 

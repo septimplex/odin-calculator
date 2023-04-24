@@ -79,6 +79,10 @@ button{
     
 }
 
+#equal:active{
+    background-color: orange;
+}
+
 .active{
     background-color: orange;
 }
