@@ -124,13 +124,19 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         }
 
         else{
+            
+            if(btn.value == 0 && number2.length < 1){
+                    number2 = "";
+                    display.innerText = "0";
+                }
+            
+
+            else{
             number2 += btn.value;
             display.innerText = number2;
+            }
         }
-
-            
-        
-        }
+    }
         
     else{
         if(btn.id == "CA"){
