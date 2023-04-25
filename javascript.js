@@ -35,10 +35,7 @@ let currentOperand = "";
 let dotString = "";
 
 btns.forEach(btn => btn.addEventListener('click', function(){
-
-    
     if(btn.className == "operation"){
-
         currentOperand = btn.value;
         removeClass();
         addClass(btn);
@@ -84,7 +81,8 @@ btns.forEach(btn => btn.addEventListener('click', function(){
             result = operate(num1,num1,currentOperand);
             display.innerText = result.toFixed(2);
             number1 = result;
-            number2 = "";     
+            number2 = "";
+              
         }
 
         else{
@@ -102,7 +100,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         removeClass();
         if(number1 == ""){
             if(btn.value == 0){
-                number1 = "";
+                number1 = "0";
                 display.innerText = "0";
             }
 
@@ -126,7 +124,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
 
         else{
             if(btn.value == 0 && number2.length < 1){
-                    number2 = "";
+                    number2 = "0";
                     display.innerText = "0";
                 }
             
@@ -221,20 +219,38 @@ btns.forEach(btn => btn.addEventListener('click', function(){
             }
         }
     }
-    console.log(number1 +"num2:"+ number2 );
-    /*
-    2. dodat dot !not more then one // dodat da ispisuje do 2 decimale
-    3. dodat msg kad se dijeli s nulom i resetirat
-    4. uredit izgled
-    5. backspace btn i funkcionalnost preko keyboard
-    */
-        
-       
-
-
+     
+      
    
 }
 ));
+
+window.addEventListener("keydown", function(e){
+    if(e.code == "Backspace"){
+        if(number1.length == 1){
+            number1 = 0;
+            display.innerText = number1;
+        }
+
+        else if(number2 == "" && number1.length > 1){
+            number1 = number1.slice(0,-1);
+            display.innerText = number1;
+        }
+
+        else if(number2 != ""){
+            if(number2.length == 1){
+                number2 = 0;
+                display.innerText = number2;
+            }
+            else{
+                number2 = number2.slice(0,-1);
+                display.innerText = number2;
+            }
+        }
+    }
+});
+
+
 
 let opBtns = document.querySelectorAll("#plus, #minus, #multiply, #divide");
 
@@ -246,6 +262,7 @@ function removeClass(){
 function addClass(btn){
     btn.classList.add("active");
 }
+
 
 function resetCalculator(){
     removeClass();
