@@ -32,12 +32,13 @@ let result = 0;
 
 let stringOperand = "";
 let currentOperand = "";
+let dotString = "";
 
 btns.forEach(btn => btn.addEventListener('click', function(){
 
     
     if(btn.className == "operation"){
-        
+
         currentOperand = btn.value;
         removeClass();
         addClass(btn);
@@ -124,7 +125,6 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         }
 
         else{
-            
             if(btn.value == 0 && number2.length < 1){
                     number2 = "";
                     display.innerText = "0";
@@ -190,12 +190,39 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         }
     }   
     else if (btn.id == "dot"){
-        if(display.innerText == number1){}
-    }
 
+        dotString = display.innerText;
+        if(dotString.indexOf(".") > 0){
+            return;
+        }
+        else{
+            if(number1 == "" && dotString == 0){
+                number1 = 0 + ".";
+                display.innerText = number1;
+                }
+                
+            
+            else if(dotString == number1){
+                number1 = number1 + ".";
+                display.innerText = number1;
+            }
+
+            else if(dotString != number1 && dotString == 0){
+                number2 = 0 + ".";
+                display.innerText = number2;
+            }
+            else{
+                number2 = number2 + ".";
+                display.innerText = number2;
+            }
+            
+        
+        dotString = "";
+            }
+        }
     }
+    console.log(number1 +"num2:"+ number2 );
     /*
-    1. popravit ono kad se upisuje pa bude 012;
     2. dodat dot !not more then one // dodat da ispisuje do 2 decimale
     3. dodat msg kad se dijeli s nulom i resetirat
     4. uredit izgled
@@ -205,11 +232,6 @@ btns.forEach(btn => btn.addEventListener('click', function(){
        
 
 
-    
-    
-    
-
-    
    
 }
 ));
