@@ -58,7 +58,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
             num2 = parseFloat(number2);
             operand = stringOperand[stringOperand.length-1];
             result = operate(num1,num2,operand);
-            display.innerText = result;
+            display.innerText = result.toFixed(2);
             number1 = result;
             number2 = "";
             stringOperand=currentOperand;
@@ -82,7 +82,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
         else if(number1 != "" && number2 == "" && currentOperand != ""){
             num1 = parseFloat(number1);
             result = operate(num1,num1,currentOperand);
-            display.innerText = result;
+            display.innerText = result.toFixed(2);
             number1 = result;
             number2 = "";     
         }
@@ -91,7 +91,7 @@ btns.forEach(btn => btn.addEventListener('click', function(){
             num1 = parseFloat(number1);
             num2 = parseFloat(number2);
             result = operate(num1,num2,currentOperand);
-            display.innerText = result;
+            display.innerText = result.toFixed(2);
             number1 = result;
             number2 = "";
         }
